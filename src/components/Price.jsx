@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
+import { CardSubtitle } from 'reactstrap';
 export default class Price extends Component {
     render() {
+        const {value} = this.props;
         return (
-            <div className="item-price">
-                ${10000}
-            </div>
+            <CardSubtitle className="item-price">
+                ${value}
+            </CardSubtitle>
         )
     }
 }

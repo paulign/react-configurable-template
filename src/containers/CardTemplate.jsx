@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Card } from 'reactstrap';
+
 import FieldTemplate from './FieldTemplate';
 
 export default class CardTemplate extends Component {
@@ -6,20 +8,56 @@ export default class CardTemplate extends Component {
         super(props);
 
         this.state = {
+            // template: [
+            //     {
+            //         component: "IMAGE",
+            //         field: "images",
+            //         children: [
+            //             {
+            //                 component: "PRICE",
+            //                 field: "price"
+            //             }
+            //         ]
+            //     },
+            //     {
+            //         component: "ADDRESS",
+            //         field: "full_address"
+            //     },
+            //     {
+            //         component: "AREA",
+            //         field: "area"
+            //     }
+            // ]
+            // template: [
+            //     {
+            //         component: "IMAGE",
+            //         field: "images"
+            //     },
+            //     {
+            //         component: "ADDRESS",
+            //         field: "full_address"
+            //     },
+            //     {
+            //         component: "PRICE",
+            //         field: "price"
+            //     },
+            //     {
+            //         component: "AREA",
+            //         field: "area"
+            //     }
+            // ]
             template: [
-                {
-                    component: "IMAGE",
-                    field: "images",
-                    children: [
-                        {
-                            component: "PRICE",
-                            field: "price"
-                        }
-                    ]
-                },
                 {
                     component: "ADDRESS",
                     field: "full_address"
+                },
+                {
+                    component: "IMAGE",
+                    field: "images"
+                },
+                {
+                    component: "PRICE",
+                    field: "price"
                 },
                 {
                     component: "AREA",
@@ -30,14 +68,15 @@ export default class CardTemplate extends Component {
     }
 
     buildCard = (template) => {
+        const { house } = this.props;
 
         return template.map((item, index) => {
             if (!item.children) {
-                return <FieldTemplate {...item} key={index} />
+                return <FieldTemplate {...item} key={index} value={house[item.field]} />
             } else {
                 return (
-                    <FieldTemplate {...item} key={index}>
-                        {this.buildCard(item.children)}
+                    <FieldTemplate {...item} key={index} value={house[item.field]}>
+                        {this.buildCard(item.children, item.field)}
                     </FieldTemplate>
                 );
             }
@@ -47,6 +86,10 @@ export default class CardTemplate extends Component {
     render() {
         const { template } = this.state;
 
-        return this.buildCard(template);
+        return (
+            <Card className="item-card">
+                {this.buildCard(template)}
+            </Card>
+        )
     }
 }

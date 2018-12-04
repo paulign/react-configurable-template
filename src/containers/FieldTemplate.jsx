@@ -3,6 +3,7 @@ import Image from '../components/Image';
 import Address from '../components/Address';
 import Price from '../components/Price';
 import Area from '../components/Area';
+import { CardBody } from 'reactstrap';
 
 export default class FieldTemplate extends Component {
     components = {
@@ -21,10 +22,10 @@ export default class FieldTemplate extends Component {
         }
 
         return (
-            <div className={`field-template ${field}-component`}>
+            <CardBody className={`field-template ${field}-component`}>
                 {this.props.children}
-                <Component />
-            </div>
+                <Component {...this.props} />
+            </CardBody>
         )
     }
 }
