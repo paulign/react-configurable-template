@@ -1,5 +1,5 @@
 const api_config = {
-    api_url: 'http://demo4452328.mockable.io/',
+    api_url: 'https://demo4452328.mockable.io/',
 }
 
 export const apiRequest = async ({ url, method = 'GET', body = null}) => {
