@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     Collapse,
     Navbar,
@@ -11,8 +12,9 @@ import {
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
+import { changeTemplate } from "../actions";
 
-export default class Header extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
 
@@ -27,6 +29,8 @@ export default class Header extends Component {
         });
     }
     render() {
+        const { templates, selectedIndex, changeTemplate } = this.props;
+
         return (
             <div>
                 <Navbar color="dark" dark fixed="top" expand="md">
@@ -35,19 +39,22 @@ export default class Header extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret>
-                                        Options
-                                </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem>
-                                            Option 1
-                                    </DropdownItem>
-                                        <DropdownItem>
-                                            Option 2
-                                    </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
+                                {!!templates && !!templates.length && (
+                                    <UncontrolledDropdown nav inNavbar>
+                                        <DropdownToggle nav caret>
+                                            Template {templates[selectedIndex].id}
+                                        </DropdownToggle>
+                                        <DropdownMenu right>
+                                            {templates.map((item, index) => {
+                                                return (
+                                                    <DropdownItem onClick={() => changeTemplate(index)} key={item.id} active={index === selectedIndex}>
+                                                        Template {item.id}
+                                                    </DropdownItem>
+                                                )
+                                            })}
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                )}
                             </Nav>
                         </Collapse>
                     </Container>
@@ -56,3 +63,12 @@ export default class Header extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        templates: state.templates.templates,
+        selectedIndex: state.templates.selectedIndex || 0
+    }
+}
+
+export default connect(mapStateToProps, { changeTemplate })(Header)

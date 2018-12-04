@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { CardTitle } from 'reactstrap';
+import { CardSubtitle } from 'reactstrap';
 
 export default class Address extends Component {
     render() {
         const {value} = this.props;
         return (
-            <CardTitle className="item-address">
+            <CardSubtitle className="item-address">
                 {value}
-            </CardTitle>
+            </CardSubtitle>
         )
     }
 }

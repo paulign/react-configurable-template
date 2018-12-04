@@ -1,3 +1,5 @@
+import 'react-app-polyfill/ie9';
+import 'core-js/es/map'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
