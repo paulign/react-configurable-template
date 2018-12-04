@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './assets/scss/style.scss';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from "redux-thunk";
 import { Provider } from 'react-redux';

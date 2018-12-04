@@ -19,6 +19,11 @@ class CardsList extends Component {
                         ))}
                     </Row>
                 )}
+                {(!houses || !houses.length) && (
+                    <div className="p-5 text-center">
+                        <h1>Nothing to display...</h1>
+                    </div>
+                )}
             </Container>
         );
     }

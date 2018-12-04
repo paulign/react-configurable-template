@@ -35,7 +35,7 @@ class CardTemplate extends Component {
     buildCard = (template) => {
         const { house } = this.props;
 
-        if(!template) {
+        if(!template || !house) {
             return null;
         }
 

@@ -1,8 +1,8 @@
 import 'react-app-polyfill/ie9';
 import 'core-js/es/map'
+import './assets/scss/style.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
