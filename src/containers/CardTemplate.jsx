@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'reactstrap';
 
-import FieldTemplate from './FieldTemplate';
+import CardGenerator from './CardGenerator';
 
 const defaultTemplate = [
     {
@@ -21,39 +21,12 @@ const defaultTemplate = [
         component: "AREA",
         field: "area"
     }
-]
+];
 
 class CardTemplate extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-        }
-    }
-
-    buildCard = (template) => {
-        const { house } = this.props;
-
-        if(!template || !house) {
-            return null;
-        }
-
-        return template.map((item, index) => {
-            if (!item.children) {
-                return <FieldTemplate {...item} key={index} value={house[item.field]} />
-            } else {
-                return (
-                    <FieldTemplate {...item} key={index} value={house[item.field]}>
-                        {this.buildCard(item.children)}
-                    </FieldTemplate>
-                );
-            }
-        })
-    }
 
     render() {
-        const { templates, selectedIndex } = this.props;
+        const { templates, selectedIndex, house } = this.props;
         let template = { ...defaultTemplate };
 
         if (templates && templates.length) {
@@ -62,7 +35,7 @@ class CardTemplate extends Component {
 
         return (
             <Card className="item-card">
-                {this.buildCard(template)}
+                <CardGenerator template={template} house={house} />
             </Card>
         )
     }
