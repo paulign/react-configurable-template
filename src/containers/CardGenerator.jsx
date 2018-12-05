@@ -12,7 +12,6 @@ const CardGenerator = ({template, house}) => {
         } else {
             return (
                 <FieldTemplate {...item} key={index} value={house[item.field]}>
-                    {this.buildCard(item.children)}
                     <CardGenerator template={item.children} house={house} />
                 </FieldTemplate>
             );
